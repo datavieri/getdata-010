@@ -1,6 +1,7 @@
 # Getting and Cleaning Data Course Project
 
 Dear grader,
+
 here it is my work for this assignment. In this repository you'll find:
 
 - This README.md
@@ -15,6 +16,7 @@ here it is my work for this assignment. In this repository you'll find:
 - Each variable forms a column
 - Each observation forms a row
 - Each type of observational unit forms a table 
+
 
   *Hadley Wickham, [Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf) *
 
@@ -34,18 +36,30 @@ Again, this was an assumption of mine, and may be different from any other, sinc
 ## Reading the code
 
 The code has some comments, and it should be readable at least.
-I strongly relied on **dplyr** package, and used the **reduce2** package to generate the data set in long form.
+I strongly relied on **dplyr** package, and used the **reshape2** package to generate the data set in long form.
 
 Main steps:
 - Read the train data (X_train.txt, y_train.txt, subject_train.txt) (7352 lines each), renaming columns for subject and activities and binding them column-wise with cbind
 - Read the test data (X_test.txt, y_test.txt, subject_test.txt) (2947 lines each), renaming columns for subject and activities and binding them column-wise with cbind
-- rbind train and test data to complete Step 1 of the assignment (full.data data frame)
+- rbind train and test data to complete Step 1 of the assignment (full.data data frame, 10299 rows)
 - Read feature labels and normalise it replacing punctuations with a single dot (e.g., from tBodyAcc-mean()-X to tBodyAcc.mean.X)
 - Use normalised labels to name columns in  full.data (first two columns being subject and activity id).
-- Subset full.data by column, using dplyr::select and contains
+- Subset full.data by column, using **dplyr::select** and **contains**
 - Read activity labels and join them with the data set using **inner_join** by activity.id. Once joined, drop the activity.id column and keep the descriptive one (i.e. activity), completing Step 3.
-- Normalise variable names, to complete Step 4 (more on this later).
-- Generate the averaged values data set of Step 5, using group_by and the amazing **summarise_each** function of dplyr. 
+- Normalise variable names, to complete Step 4 *(more on this later)*.
+- Generate the averaged values data set of Step 5, using **group_by** and the amazing **summarise_each** function of dplyr. 
+
+Now, since bandsEnergy feature names are duplicated (e.g., fBodyAcc.bandsEnergy.1.16), and this causes problems to the select function I was relying on for selecting target columns, I went for a trick. 
+First, I added a known pattern (_C<column_number>) to the column name.
+Then, to complete Step 4, I removed the pattern from column names using **gsub**. I am sure there could have been different approaches, but I hope this justifies lines 53 and 72 of the code.
 
 ## How to run the code
+
+The code assumes that:
+- You have dplyr and reshape2 installed
+- the working directory corresponds to the UCI directory, and train and test folders are in this directory, too.
+
+The script generates two files in the current directory:
+- dataset.wide.txt (the tidy dataset in wide format)
+- dataset.long.txt (the same dataset in long format)
 
