@@ -1,6 +1,6 @@
 ## Cook book for the **long form** data set 
 
-The data set contains **180** observations of 81 variables.
+The data set contains **180** observations *(6 activities x 30 subjects)* of 81 variables.
 
 ### Variables
 
