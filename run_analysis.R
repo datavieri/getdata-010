@@ -78,7 +78,7 @@ avg.data <- working.data %>%
     summarise_each(funs(mean))
 
 # Save tidy data set in wide form (the tidy data set submitted)
-write.table(file = "step5.txt", x = avg.data, row.names = FALSE)
+write.table(file = "dataset.wide.txt", x = avg.data, row.names = FALSE)
 
 ### Optionally, provide the same tidy data set in long form
 avg.data.long <- avg.data %>%
@@ -86,4 +86,4 @@ avg.data.long <- avg.data %>%
     arrange(activity, subject, variable)
 
 # Save tidy data set in long form
-write.table(file = "step5.long.txt", x = avg.data.long, row.names = FALSE)
+write.table(file = "dataset.long.txt", x = avg.data.long, row.names = FALSE)
