@@ -1,6 +1,6 @@
-setwd("~/getdata-010//PA1/data/")
 
 library("dplyr")
+library("reshape2")
 
 ##### STEP 1 - Merge training and test data 
 ### Read training data
@@ -34,6 +34,7 @@ full.data <- rbind(train.data, test.data)
 
 ### Read feature labels
 feature.labels <- read.table("features.txt", header = FALSE, as.is = TRUE)
+### Normalise feature labels
 feature.labels <- feature.labels %>% 
     rename(feature.id = V1, feature = V2 ) %>%
     mutate(feature = gsub(pattern = "[[:punct:]]", 
@@ -48,10 +49,10 @@ feature.labels <- feature.labels %>%
 # Column 1 = subject.id
 # Column 2 = activity.id
 # Columns 3-563 = features
-# Column indexes are added to avoid duplicate column names 
+# Column indexes are added to avoid duplicate column names (and later removed)
 names(full.data)[3:563] <- paste(feature.labels[[2]], "_C", feature.labels[[1]], sep = "")
 
-
+### Subset data on mean and std columns (excluding gravityMean)
 working.data <- select(full.data, subject, activity.id, 
                      contains("mean"), contains("std"), -contains("gravityMean"))
 
@@ -76,11 +77,13 @@ avg.data <- working.data %>%
     group_by(activity, subject) %>% 
     summarise_each(funs(mean))
 
-write.table(file = "step5.txt", x = avg.data, row.names = FALSE)
+# Save tidy data set in wide form
+write.table(file = "data/dataset.wide.txt", x = avg.data, row.names = FALSE)
 
 ### Optionally, provide the same tidy data set in long form
 avg.data.long <- avg.data %>%
     melt(id=c("activity", "subject")) %>%
     arrange(activity, subject, variable)
 
-write.table(file = "step5.long.txt", x = avg.data.long, row.names = FALSE)
+# Save tidy data set in long form
+write.table(file = "data/dataset.long.txt", x = avg.data.long, row.names = FALSE)
