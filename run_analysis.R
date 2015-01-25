@@ -1,6 +1,6 @@
+setwd("~/getdata-010//PA1/data/")
 
 library("dplyr")
-library("reshape2")
 
 ##### STEP 1 - Merge training and test data 
 ### Read training data
@@ -52,9 +52,9 @@ feature.labels <- feature.labels %>%
 # Column indexes are added to avoid duplicate column names (and later removed)
 names(full.data)[3:563] <- paste(feature.labels[[2]], "_C", feature.labels[[1]], sep = "")
 
-### Subset data on mean and std columns (excluding gravityMean)
+### Subset data on mean and std columns (excluding angles between vectors)
 working.data <- select(full.data, subject, activity.id, 
-                     contains("mean"), contains("std"), -contains("gravityMean"))
+                     contains("mean"), contains("std"), -contains("angle"))
 
 ##### STEP 3 - Use descriptive activity names
 ### Read activity labels
@@ -77,8 +77,8 @@ avg.data <- working.data %>%
     group_by(activity, subject) %>% 
     summarise_each(funs(mean))
 
-# Save tidy data set in wide form
-write.table(file = "dataset.wide.txt", x = avg.data, row.names = FALSE)
+# Save tidy data set in wide form (the tidy data set submitted)
+write.table(file = "step5.txt", x = avg.data, row.names = FALSE)
 
 ### Optionally, provide the same tidy data set in long form
 avg.data.long <- avg.data %>%
@@ -86,4 +86,4 @@ avg.data.long <- avg.data %>%
     arrange(activity, subject, variable)
 
 # Save tidy data set in long form
-write.table(file = "dataset.long.txt", x = avg.data.long, row.names = FALSE)
+write.table(file = "step5.long.txt", x = avg.data.long, row.names = FALSE)
