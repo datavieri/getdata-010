@@ -1,6 +1,6 @@
 ## Cook book for the **long form** data set 
 
-The data set contains **180** observations *(6 activities x 30 subjects)* of 81 variables.
+The data set contains **180** observations *(6 activities x 30 subjects)* of **81** variables.
 
 ### Variables
 
@@ -21,10 +21,10 @@ The data set contains **180** observations *(6 activities x 30 subjects)* of 81 
   
 **averages**
 
-  The 79 variables provides the average of relevant varibles for each activity and each subject.
+  The 79 variables provides the average of relevant variables for each activity and each subject.
   Selected variables includes 40 measures in the time domain (t*) and 49 measures in the frequency domain (f*).
   Angles between vectors has not been included in this data set.
-  All features are normalized and bounded within [-1,1], being the average of normalized features.
+  All features are numeric, normalized and bounded within [-1,1] (being the average of normalized features).
   
   The full list of variables is provided here:
   
