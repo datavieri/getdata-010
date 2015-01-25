@@ -18,7 +18,7 @@ here it is my work for this assignment. In this repository you'll find:
 - Each type of observational unit forms a table 
 
 
-  *Hadley Wickham, [Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf) *
+*Hadley Wickham, [Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf)
 
 We were asked to generate a tidy data set with the average of each variable for each activity and each subject.
 The source data included two sets (train + test) of 561-feature vector with time and frequency domain variables, measured during an experiment where 30 subjects performed 6 types of activities wearing a smartphone on their waist.
@@ -32,6 +32,11 @@ This is one of the reasons I choosed to go for the wide form. Still, I also made
 I decided to keep it simple. I considered acceptable mean, std and meanFreq, while I excluded angles between vectors, even if they take mean into considerations (e.g. angle.X.gravityMean). This led me to obtain 79 variables (46 means and 33 standard deviations).
 
 Again, this was an assumption of mine, and may be different from any other, since the criteria were left (deliberately?) open.
+
+### Checking the data set
+
+To read the data set, you can download it and simply load it using read.table("<your_filename_here>", header = TRUE).
+It should have 180 rows and 81 columns.
 
 ## Reading the code
 
@@ -63,3 +68,4 @@ The script generates two files in the current directory:
 - dataset.wide.txt (the tidy dataset in wide format)
 - dataset.long.txt (the same dataset in long format)
 
+Hope this helps...
