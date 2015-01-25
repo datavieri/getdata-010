@@ -35,7 +35,7 @@ Again, this was an assumption of mine, and may be different from any other, sinc
 
 ### Checking the data set
 
-To read the data set, you can download it and simply load it using read.table("<your_filename_here>", header = TRUE).
+To read the data set, you can download it and simply load it using ```read.table("<your_filename_here>", header = TRUE)```.
 It should have 180 rows and 81 columns.
 
 ## Reading the code
